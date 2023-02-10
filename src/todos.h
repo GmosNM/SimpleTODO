@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-//todo: set the stats of a todo
+//todo: set the status of a todo
 //todo: add a section for the done and the todos
 
 void createTODO(char* name);
