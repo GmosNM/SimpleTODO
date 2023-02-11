@@ -1,14 +1,14 @@
 #include "todos.h"
 
 
-
-char buffer[1024];
+#define BUFFER_SIZE 1024
+char buffer[BUFFER_SIZE];
 
 void createTODO(char* name){
     if(name == NULL){
         exit(1);
     }
-    OpenFile("src/todos.txt", name);
+    AddTODO("src/todos.txt", name);
 }
 
 void showLIST(){
@@ -25,13 +25,13 @@ void showLIST(){
     fclose(f);
 }
 
-void OpenFile(const char *file_path, char* todoName) {
+void AddTODO(const char *file_path, char* todoName) {
     FILE *f = fopen(file_path, "a");
     if(f == NULL){
         printf("ERROR: %c:",errno);
         exit(1);
     }
-    fprintf(f,"TODO: %s", todoName);
+    fprintf(f,"TODO: %s",todoName);
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -49,15 +49,39 @@ void clearList() {
     fprintf(f,"");
 }
 
-void RemoveTODO(const char *name) {
-    if(name == NULL) exit(1);
-    FILE *f = fopen("src/todos.txt", "r");
-    if(f == NULL){
-        printf("ERROR: %c:",errno);
+
+void RemoveTODO() {
+    FILE *f, *temp;
+
+    char *filename = "src/todos.txt";
+    char *temp_filename = "src/temp.temp";
+
+    int delete_line = 0;
+
+    printf("Delete TODO: (line number): ");
+    scanf("%d", &delete_line);
+
+    f = fopen(filename, "r");
+    temp = fopen(temp_filename, "w");
+
+    if (f == NULL || temp == NULL)
+    {
+        printf("Error opening file(s)\n");
         exit(1);
     }
-    //todo: read the file
-
-    //todo: remove the line
+    bool keep_reading = true;
+    int current_line = 1;
+    do
+    {
+        fgets(buffer, BUFFER_SIZE, f);
+        if (feof(f)) keep_reading = false;
+        else if (current_line != delete_line)
+            fputs(buffer, temp);
+        current_line++;
+    } while (keep_reading);
     fclose(f);
+    fclose(temp);
+    remove(filename);
+    rename(temp_filename, filename);
 }
+
