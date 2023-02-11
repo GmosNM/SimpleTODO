@@ -64,11 +64,7 @@ void RemoveTODO() {
     f = fopen(filename, "r");
     temp = fopen(temp_filename, "w");
 
-    if (f == NULL || temp == NULL)
-    {
-        printf("Error opening file(s)\n");
-        exit(1);
-    }
+    if (f == NULL || temp == NULL){exit(1);}
     bool keep_reading = true;
     int current_line = 1;
     do
