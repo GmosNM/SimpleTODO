@@ -3,8 +3,6 @@
 #include "todos.h"
 #include <string.h>
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
 void print_usage(char **argv) {
     printf("\nUSAGE: %s [FLAGS]\n", argv[0]);
     printf("Flags:\n"
@@ -35,5 +33,3 @@ int main(int argc, char *argv[]){
 
     return 0;
 }
-
-#pragma clang diagnostic pop
