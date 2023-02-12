@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(todoapp C)
+project(todo C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -8,4 +8,4 @@ set(SRC
     src/todos.h
     src/todos.c)
 
-add_executable(todoapp ${SRC})
+add_executable(todo ${SRC})
