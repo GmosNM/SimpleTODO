@@ -5,9 +5,6 @@
 #include <stdbool.h>
 
 
-//todo: set the status of a todo
-//todo: add a section for the done and the todos
-
 void createTODO(char* name);
 void MoveTODO();
 void showLIST();
